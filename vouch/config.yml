@@ -1,0 +1,28 @@
+vouch:
+  loglevel: debug
+  domains:
+  - host.docker.internal
+  - alaska.edu
+  - mperry.io
+  allowAllUsers: false
+
+  cookie:
+    secure: false
+  headers:
+    idtoken: X-Vouch-IdP-IdToken
+    claims:
+      - team
+      - email
+
+oauth:
+  provider: oidc
+  client_id: 623e9246edbe11b44fcd2584
+  client_secret: M9UEmClSSNWF0luDMnwLVgTHK4r5aIDWF35E0tEg9kk
+  auth_url: http://auth.mperry.io/authorize
+  token_url: http://auth.mperry.io/token
+  user_info_url: http://auth.mperry.io/userinfo
+  scopes:
+    - openid
+    - email
+    - profile
+  callback_url: http://secret.mperry.io/auth
