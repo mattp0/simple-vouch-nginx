@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  nginx:
+    image: nginx:1.15-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/data:/var/www/data
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/app.conf:/etc/nginx/nginx.conf
+    restart: unless-stopped
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  vouch:
+    container_name: authz-vouch
+    image: quay.io/vouch/vouch-proxy:latest
+    volumes: 
+      - ./vouch/:/config
